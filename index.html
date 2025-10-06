@@ -93,11 +93,32 @@
     a:hover {
       text-decoration: underline;
     }
+
+    /* Clean list styling */
+    ul {
+      list-style: none; /* removes the dots */
+      padding: 0;
+      margin-top: 1rem; /* spacing under the title */
+    }
+
+    ul li {
+      margin-bottom: 0.6rem; /* spacing between links */
+    }
+
+    h2 {
+      margin-bottom: 0.75rem; /* spacing under section titles */
+      color: #79c0ff;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: #c9d1d9;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>Galaxy A03 Core resources page</h1>
+    <h1>Galaxy A03 Core Resources Page</h1>
     <nav>
       <button onclick="showPage('home')">Home</button>
       <button onclick="showPage('kernels')">Kernels</button>
@@ -114,29 +135,29 @@
     </section>
 
     <section id="kernels" class="page">
-      <h2>Kernels (All by IverCoder on github ❤️ )</h2>
+      <h2>Kernels (All by IverCoder on GitHub ❤️)</h2>
       <ul>
-       <li><a href="https://github.com/IverCoder/android_kernel_samsung_a3core/releases/download/4.14.204-202410311709/4.14.204-a3core_IverCoder-202410311709-NoKSU.7z" target="_blank">4.14.204-202410311709 NO KSU - by IverCoder</a></li>
+        <li><a href="https://github.com/IverCoder/android_kernel_samsung_a3core/releases/download/4.14.204-202410311709/4.14.204-a3core_IverCoder-202410311709-NoKSU.7z" target="_blank">4.14.204-202410311709 NO KSU - by IverCoder</a></li>
         <li><a href="https://github.com/IverCoder/android_kernel_samsung_a3core/releases/download/4.14.204-202410311709/4.14.204-a3core-202410311709-Rissu_KSU_Arm32_0.7.6_rc1.7z" target="_blank">4.14.204-202410311709 Rissu_KSU v0.7.6 - by IverCoder</a></li>
       </ul>
     </section>
 
     <section id="recoveries" class="page">
       <h2>Recoveries</h2>
-      <p>TWRP IS UNSTABLE - TOUCH NOT WORKING / FASTBOOTD NOT WORKING / DECRYPTION NOT WORKING (don't flash it >-<)</p>
+      <p>TWRP IS UNSTABLE — TOUCH NOT WORKING / FASTBOOTD NOT WORKING / DECRYPTION NOT WORKING (don’t flash it 😬)</p>
       <ul>
-       <li><a href="https://t.me/A03Cdevelopment/7/26425" target="_blank">TWRP - Sheffdeveloper - UNUSABLE</a></li>
-        <li><a href="https://t.me/A03Cdevelopment/7/76264" target="_blank">eng-recovery - 3443 - FASTBOOTD RECOVERY - A032F/A0323M</a></li>
+        <li><a href="https://t.me/A03Cdevelopment/7/26425" target="_blank">TWRP - Sheffdeveloper - UNUSABLE</a></li>
+        <li><a href="https://t.me/A03Cdevelopment/7/76264" target="_blank">eng-recovery - 3443 - FASTBOOTD RECOVERY - A032F/A032M</a></li>
       </ul>
     </section>
 
     <section id="roms" class="page">
       <h2>SEMI GSIs / ROMs</h2>
-      <p>Please flash system.img files with fastboot, and super.img files with heimdall / odin</p>
+      <p>Please flash <code>system.img</code> files with fastboot, and <code>super.img</code> files with heimdall / odin.</p>
+      <p>(<code>system.img</code> semi-GSIs support both models A032F and A032M)</p>
       <ul>
-       <li><a href="https://github.com/3443eee/Naked-AOSP/releases/download/v1.3.0/NAOSP_a64-bvn_v1.3.0.img" target="_blank">[A15] Naked AOSP - 3443 - Vanilla variant ONLY (FASTBOOT FLASH)</a></li>
-        <li><a href="https://github.com/GoofyOzy4/lineage-a3core-gsi/releases/tag/v5" target="_blank">[A13] Lineage OS 21 - GoofyOzy4 - All variants (BINARY SPECIFIC)</a></li>
-        
+        <li><a href="https://github.com/GoofyOzy4/lineage-a3core-gsi/releases/tag/v5" target="_blank">[A13] Lineage OS 21 - GoofyOzy4 - All variants (super.img - BINARY SPECIFIC)</a></li>
+        <li><a href="https://t.me/A03Cdevelopment/1/77068" target="_blank">[A12L] Project nil (VERY LIGHTWEIGHT) - 3443 - Vanilla variant ONLY (system.img - FASTBOOT FLASH)</a></li>
       </ul>
     </section>
 
