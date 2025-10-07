@@ -6,11 +6,7 @@
   <title>A03 Core Resources</title>
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: system-ui, sans-serif;
@@ -30,10 +26,7 @@
       border-bottom: 1px solid #30363d;
     }
 
-    header h1 {
-      font-size: 1.25rem;
-      color: #58a6ff;
-    }
+    header h1 { font-size: 1.25rem; color: #58a6ff; }
 
     nav {
       display: flex;
@@ -48,7 +41,7 @@
       border-radius: 0.5rem;
       font-weight: 500;
       cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+      transition: background 0.18s ease, color 0.18s ease, transform 0.12s ease;
     }
 
     nav button:hover {
@@ -71,103 +64,73 @@
       color: #8b949e;
     }
 
-    /* Page sections */
-    .page {
-      display: none;
-      animation: fadeIn 0.3s ease;
-    }
-
-    .active {
-      display: block;
-    }
+    .page { display: none; animation: fadeIn 0.28s ease; }
+    .active { display: block; }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    a {
-      color: #58a6ff;
-      text-decoration: none;
-    }
+    a { color: #58a6ff; text-decoration: none; }
+    a:hover { text-decoration: underline; }
 
-    a:hover {
-      text-decoration: underline;
-    }
+    h2 { margin-bottom: 0.75rem; color: #79c0ff; }
+    p { margin-bottom: 1rem; color: #c9d1d9; }
 
-    ul {
-      list-style: none;
-      padding: 0;
-      margin-top: 1rem;
-    }
-
-    ul li {
-      margin-bottom: 0.6rem;
-    }
-
-    h2 {
-      margin-bottom: 0.75rem;
-      color: #79c0ff;
-    }
-
-    p {
-      margin-bottom: 1rem;
-      color: #c9d1d9;
-    }
-
-    /* Home page button grid */
+    /* Button grid (centered, responsive, last row centered) */
     .button-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(180px, 240px));
       gap: 1rem;
-      max-width: 700px;
+      justify-content: center;    /* centers columns when there's extra space */
+      justify-items: center;      /* centers items inside each cell */
+      max-width: 980px;
       margin: 2rem auto;
+      padding: 0 1rem;
     }
 
+    /* Buttons used for both <button> and <a> */
     .home-btn {
-      background: #21262d;
-      color: #c9d1d9;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      width: 100%;
       padding: 1rem;
       border: none;
       border-radius: 0.75rem;
       font-size: 1rem;
-      font-weight: 500;
+      font-weight: 600;
+      background: #21262d;
+      color: #c9d1d9;
       cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+      text-decoration: none; /* for anchor */
+      transition: background 0.18s ease, color 0.18s ease, transform 0.15s ease, box-shadow 0.18s ease;
+      box-shadow: 0 0 0 rgba(88,166,255,0);
     }
 
     .home-btn:hover {
       background: #30363d;
       color: #58a6ff;
       transform: translateY(-3px);
-      box-shadow: 0 4px 12px rgba(88, 166, 255, 0.15);
+      box-shadow: 0 8px 20px rgba(88,166,255,0.08);
     }
 
-    /* Telegram link styling */
-    .telegram-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      background: #21262d;
-      padding: 0.7rem 1.2rem;
-      border-radius: 0.5rem;
-      color: #58a6ff;
-      font-weight: 500;
-      text-decoration: none;
-      transition: background 0.2s ease, transform 0.2s ease;
-      margin-top: 1rem;
+    /* make sure <button> and <a> look identical and keep icon sizes */
+    .home-btn svg { width: 20px; height: 20px; fill: currentColor; opacity: 0.95; }
+
+    /* small responsive tweaks */
+    @media (max-width: 420px) {
+      .button-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; }
+      .home-btn { font-size: 0.95rem; padding: 0.9rem; }
+      header { padding: 0.8rem 1rem; }
     }
 
-    .telegram-link:hover {
-      background: #30363d;
-      transform: translateY(-2px);
-    }
-
-    .telegram-icon {
-      width: 20px;
-      height: 20px;
-      fill: #58a6ff;
-    }
+    /* Links list styling for sections */
+    ul { list-style: none; padding: 0; margin-top: 1rem; }
+    ul li { margin-bottom: 0.6rem; color: #c9d1d9; }
+    code { background: #0b1220; padding: 0.12rem 0.32rem; border-radius: 6px; color: #9be3ff; }
   </style>
 </head>
 <body>
@@ -188,27 +151,44 @@
       <h2>Welcome to the A03 Core Resources Page</h2>
       <p>Select a category below to explore kernels, recoveries, ROMs, tools, and more.</p>
 
-      <div class="button-grid">
-        <button class="home-btn" onclick="showPage('kernels')">⚙️ Kernels</button>
-        <button class="home-btn" onclick="showPage('recoveries')">💾 Recoveries</button>
-        <button class="home-btn" onclick="showPage('roms')">📱 ROMs</button>
-        <button class="home-btn" onclick="showPage('tools')">🧰 Tools & Instructions</button>
-      </div>
+      <div class="button-grid" role="list">
+        <button class="home-btn" onclick="showPage('kernels')" role="listitem" aria-label="Kernels">
+          <span>⚙️</span>
+          <span>Kernels</span>
+        </button>
 
-      <a href="https://t.me/A03Cdevelopment" target="_blank" class="telegram-link">
-        <svg class="telegram-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
-          <path d="M120 0C53.7 0 0 53.7 0 120s53.7 120 120 120 120-53.7 120-120S186.3 0 120 0zm58.3 80.7l-17.6 82.9c-1.3 5.9-4.8 7.3-9.7 4.5l-26.9-19.8-13 12.5c-1.4 1.4-2.5 2.5-5.1 2.5l1.8-26.3 47.9-43.3c2.1-1.9-0.5-3-3.3-1.1l-59.3 37.3-25.5-8c-5.5-1.7-5.6-5.5 1.2-8.1l99.6-38.4c4.6-1.7 8.6 1.1 7.1 8z"/>
-        </svg>
-        Join Telegram Group
-      </a>
+        <button class="home-btn" onclick="showPage('recoveries')" role="listitem" aria-label="Recoveries">
+          <span>💾</span>
+          <span>Recoveries</span>
+        </button>
+
+        <button class="home-btn" onclick="showPage('roms')" role="listitem" aria-label="ROMs">
+          <span>📱</span>
+          <span>ROMs</span>
+        </button>
+
+        <button class="home-btn" onclick="showPage('tools')" role="listitem" aria-label="Tools and Instructions">
+          <span>🧰</span>
+          <span>Tools &amp; Instructions</span>
+        </button>
+
+        <!-- Telegram item placed as an <a> so it opens externally -->
+        <a class="home-btn" href="https://t.me/A03Cdevelopment" target="_blank" rel="noopener noreferrer" role="listitem" aria-label="Join Telegram group">
+          <!-- Inline Telegram SVG -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" aria-hidden="true">
+            <path d="M120 0C53.7 0 0 53.7 0 120s53.7 120 120 120 120-53.7 120-120S186.3 0 120 0zm58.3 80.7l-17.6 82.9c-1.3 5.9-4.8 7.3-9.7 4.5l-26.9-19.8-13 12.5c-1.4 1.4-2.5 2.5-5.1 2.5l1.8-26.3 47.9-43.3c2.1-1.9-0.5-3-3.3-1.1l-59.3 37.3-25.5-8c-5.5-1.7-5.6-5.5 1.2-8.1l99.6-38.4c4.6-1.7 8.6 1.1 7.1 8z"/>
+          </svg>
+          <span>Join Telegram</span>
+        </a>
+      </div>
     </section>
 
     <!-- KERNELS -->
     <section id="kernels" class="page">
       <h2>Kernels (All by IverCoder on GitHub ❤️)</h2>
       <ul>
-        <li><a href="https://github.com/IverCoder/android_kernel_samsung_a3core/releases/download/4.14.204-202410311709/4.14.204-a3core_IverCoder-202410311709-NoKSU.7z" target="_blank">4.14.204-202410311709 NO KSU - by IverCoder</a></li>
-        <li><a href="https://github.com/IverCoder/android_kernel_samsung_a3core/releases/download/4.14.204-202410311709/4.14.204-a3core-202410311709-Rissu_KSU_Arm32_0.7.6_rc1.7z" target="_blank">4.14.204-202410311709 Rissu_KSU v0.7.6 - by IverCoder</a></li>
+        <li><a href="https://github.com/IverCoder/android_kernel_samsung_a3core/releases/download/4.14.204-202410311709/4.14.204-a3core_IverCoder-202410311709-NoKSU.7z" target="_blank" rel="noopener noreferrer">4.14.204-202410311709 NO KSU - by IverCoder</a></li>
+        <li><a href="https://github.com/IverCoder/android_kernel_samsung_a3core/releases/download/4.14.204-202410311709/4.14.204-a3core-202410311709-Rissu_KSU_Arm32_0.7.6_rc1.7z" target="_blank" rel="noopener noreferrer">4.14.204-202410311709 Rissu_KSU v0.7.6 - by IverCoder</a></li>
       </ul>
     </section>
 
@@ -217,8 +197,8 @@
       <h2>Recoveries</h2>
       <p>TWRP IS VERY UNSTABLE (don’t flash it 😬)</p>
       <ul>
-        <li><a href="https://t.me/A03Cdevelopment/7/26425" target="_blank">TWRP - sheffdeveloper - UNSTABLE</a></li>
-        <li><a href="https://t.me/A03Cdevelopment/7/76264" target="_blank">eng-recovery - 3443 - FASTBOOTD RECOVERY - A032F/A032M</a></li>
+        <li><a href="https://t.me/A03Cdevelopment/7/26425" target="_blank" rel="noopener noreferrer">TWRP - sheffdeveloper - UNSTABLE</a></li>
+        <li><a href="https://t.me/A03Cdevelopment/7/76264" target="_blank" rel="noopener noreferrer">eng-recovery - 3443 - FASTBOOTD RECOVERY - A032F/A032M</a></li>
       </ul>
     </section>
 
@@ -228,10 +208,10 @@
       <p>Please flash <code>system.img</code> files with fastboot, and <code>super.img</code> files with heimdall / odin.</p>
       <p>(<code>system.img</code> semi-GSIs support both models A032F and A032M)</p>
       <ul>
-        <li><a href="https://github.com/GoofyOzy4/lineage-a3core-gsi/releases/tag/v5" target="_blank">[A13] Lineage OS 21 - GoofyOzy4 - All variants (super.img - BINARY SPECIFIC)</a></li>
-        <li><a href="https://t.me/A03Cdevelopment/1/77068" target="_blank">[A12L] Project nil (VERY LIGHTWEIGHT) - 3443 - Vanilla variant ONLY (system.img - FASTBOOT FLASH)</a></li>
-        <li><a href="https://t.me/A03CoreINDONESIA/382/5529" target="_blank">[A15] Fake LOS (AOSP with los apps) - 3443 - Vanilla variant ONLY (system.img - FASTBOOT FLASH)</a></li>
-        <li><a href="https://t.me/A03CoreINDONESIA/382/5470" target="_blank">[EXPERIENCED USERS ONLY] [A15] Naked AOSP - 3443 - Vanilla variant ONLY (system.img - FASTBOOT FLASH)</a></li>
+        <li><a href="https://github.com/GoofyOzy4/lineage-a3core-gsi/releases/tag/v5" target="_blank" rel="noopener noreferrer">[A13] Lineage OS 21 - GoofyOzy4 - All variants (super.img - BINARY SPECIFIC)</a></li>
+        <li><a href="https://t.me/A03Cdevelopment/1/77068" target="_blank" rel="noopener noreferrer">[A12L] Project nil (VERY LIGHTWEIGHT) - 3443 - Vanilla variant ONLY (system.img - FASTBOOT FLASH)</a></li>
+        <li><a href="https://t.me/A03CoreINDONESIA/382/5529" target="_blank" rel="noopener noreferrer">[A15] Fake LOS (AOSP with los apps) - 3443 - Vanilla variant ONLY (system.img - FASTBOOT FLASH)</a></li>
+        <li><a href="https://t.me/A03CoreINDONESIA/382/5470" target="_blank" rel="noopener noreferrer">[EXPERIENCED USERS ONLY] [A15] Naked AOSP - 3443 - Vanilla variant ONLY (system.img - FASTBOOT FLASH)</a></li>
       </ul>
     </section>
 
@@ -240,11 +220,11 @@
       <h2>Tools</h2>
       <p>Useful instructions, tools, drivers, and scripts for A03 core</p>
       <ul>
-        <li><a href="https://github.com/FlowerGEN/samsung-a03-core-superimg-tool/releases" target="_blank">super.img gsi packer for A03 core - 3443 - Windows version</a></li>
-        <li><a href="https://github.com/GoofyOzy4/A03CoreTweak-A032/releases" target="_blank">A03CoreTweak Magisk module - GoofyOzy4</a></li>
-        <li><a href="https://t.me/A03Cdevelopment/94/76439" target="_blank">super.img gsi packer for A03 core - 3443 - Linux version</a></li>
-        <li><a href="https://t.me/A03Cdevelopment/1/76580" target="_blank">Unicock usb drivers</a></li>
-        <li><a href="https://t.me/A03Cdevelopment/17/76473" target="_blank">[INSTRUCTION] How to install GSI using fastbootd recovery - sheffdeveloper</a></li>
+        <li><a href="https://github.com/FlowerGEN/samsung-a03-core-superimg-tool/releases" target="_blank" rel="noopener noreferrer">super.img gsi packer for A03 core - 3443 - Windows version</a></li>
+        <li><a href="https://github.com/GoofyOzy4/A03CoreTweak-A032/releases" target="_blank" rel="noopener noreferrer">A03CoreTweak Magisk module - GoofyOzy4</a></li>
+        <li><a href="https://t.me/A03Cdevelopment/94/76439" target="_blank" rel="noopener noreferrer">super.img gsi packer for A03 core - 3443 - Linux version</a></li>
+        <li><a href="https://t.me/A03Cdevelopment/1/76580" target="_blank" rel="noopener noreferrer">Unicock usb drivers</a></li>
+        <li><a href="https://t.me/A03Cdevelopment/17/76473" target="_blank" rel="noopener noreferrer">[INSTRUCTION] How to install GSI using fastbootd recovery - sheffdeveloper</a></li>
       </ul>
     </section>
   </main>
