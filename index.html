@@ -48,12 +48,13 @@
       border-radius: 0.5rem;
       font-weight: 500;
       cursor: pointer;
-      transition: background 0.2s ease, color 0.2s ease;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
     }
 
     nav button:hover {
       background: #30363d;
       color: #58a6ff;
+      transform: translateY(-1px);
     }
 
     main {
@@ -94,7 +95,6 @@
       text-decoration: underline;
     }
 
-    /* Clean list styling */
     ul {
       list-style: none;
       padding: 0;
@@ -115,18 +115,47 @@
       color: #c9d1d9;
     }
 
+    /* Home page button grid */
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      max-width: 700px;
+      margin: 2rem auto;
+    }
+
+    .home-btn {
+      background: #21262d;
+      color: #c9d1d9;
+      padding: 1rem;
+      border: none;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    }
+
+    .home-btn:hover {
+      background: #30363d;
+      color: #58a6ff;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(88, 166, 255, 0.15);
+    }
+
     /* Telegram link styling */
     .telegram-link {
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
       background: #21262d;
-      padding: 0.6rem 1rem;
+      padding: 0.7rem 1.2rem;
       border-radius: 0.5rem;
       color: #58a6ff;
       font-weight: 500;
       text-decoration: none;
       transition: background 0.2s ease, transform 0.2s ease;
+      margin-top: 1rem;
     }
 
     .telegram-link:hover {
@@ -154,18 +183,27 @@
   </header>
 
   <main>
+    <!-- HOME PAGE -->
     <section id="home" class="page active">
       <h2>Welcome to the A03 Core Resources Page</h2>
-      <p>Click a button above to view kernels, recoveries, ROMs, and more.</p>
-      
+      <p>Select a category below to explore kernels, recoveries, ROMs, tools, and more.</p>
+
+      <div class="button-grid">
+        <button class="home-btn" onclick="showPage('kernels')">⚙️ Kernels</button>
+        <button class="home-btn" onclick="showPage('recoveries')">💾 Recoveries</button>
+        <button class="home-btn" onclick="showPage('roms')">📱 ROMs</button>
+        <button class="home-btn" onclick="showPage('tools')">🧰 Tools & Instructions</button>
+      </div>
+
       <a href="https://t.me/A03Cdevelopment" target="_blank" class="telegram-link">
         <svg class="telegram-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
           <path d="M120 0C53.7 0 0 53.7 0 120s53.7 120 120 120 120-53.7 120-120S186.3 0 120 0zm58.3 80.7l-17.6 82.9c-1.3 5.9-4.8 7.3-9.7 4.5l-26.9-19.8-13 12.5c-1.4 1.4-2.5 2.5-5.1 2.5l1.8-26.3 47.9-43.3c2.1-1.9-0.5-3-3.3-1.1l-59.3 37.3-25.5-8c-5.5-1.7-5.6-5.5 1.2-8.1l99.6-38.4c4.6-1.7 8.6 1.1 7.1 8z"/>
         </svg>
-        Join Development Group
+        Join Telegram Group
       </a>
     </section>
 
+    <!-- KERNELS -->
     <section id="kernels" class="page">
       <h2>Kernels (All by IverCoder on GitHub ❤️)</h2>
       <ul>
@@ -174,6 +212,7 @@
       </ul>
     </section>
 
+    <!-- RECOVERIES -->
     <section id="recoveries" class="page">
       <h2>Recoveries</h2>
       <p>TWRP IS VERY UNSTABLE (don’t flash it 😬)</p>
@@ -183,6 +222,7 @@
       </ul>
     </section>
 
+    <!-- ROMS -->
     <section id="roms" class="page">
       <h2>SEMI GSIs / ROMs</h2>
       <p>Please flash <code>system.img</code> files with fastboot, and <code>super.img</code> files with heimdall / odin.</p>
@@ -191,31 +231,33 @@
         <li><a href="https://github.com/GoofyOzy4/lineage-a3core-gsi/releases/tag/v5" target="_blank">[A13] Lineage OS 21 - GoofyOzy4 - All variants (super.img - BINARY SPECIFIC)</a></li>
         <li><a href="https://t.me/A03Cdevelopment/1/77068" target="_blank">[A12L] Project nil (VERY LIGHTWEIGHT) - 3443 - Vanilla variant ONLY (system.img - FASTBOOT FLASH)</a></li>
         <li><a href="https://t.me/A03CoreINDONESIA/382/5529" target="_blank">[A15] Fake LOS (AOSP with los apps) - 3443 - Vanilla variant ONLY (system.img - FASTBOOT FLASH)</a></li>
-        <li><a href="https://t.me/A03CoreINDONESIA/382/5470" target="_blank">[EXPERIENCED USERS ONLY] [A15] Naked AOSP (VERY LIGHTWEIGHT - NO LAUNCHER/DAILY APPS INCLUDED) - 3443 - Vanilla variant ONLY (system.img - FASTBOOT FLASH)</a></li>
+        <li><a href="https://t.me/A03CoreINDONESIA/382/5470" target="_blank">[EXPERIENCED USERS ONLY] [A15] Naked AOSP - 3443 - Vanilla variant ONLY (system.img - FASTBOOT FLASH)</a></li>
       </ul>
     </section>
 
+    <!-- TOOLS -->
     <section id="tools" class="page">
       <h2>Tools</h2>
       <p>Useful instructions, tools, drivers, and scripts for A03 core</p>
       <ul>
         <li><a href="https://github.com/FlowerGEN/samsung-a03-core-superimg-tool/releases" target="_blank">super.img gsi packer for A03 core - 3443 - Windows version</a></li>
         <li><a href="https://github.com/GoofyOzy4/A03CoreTweak-A032/releases" target="_blank">A03CoreTweak Magisk module - GoofyOzy4</a></li>
-        <li><a href="https://t.me/A03Cdevelopment/94/76439" target="_blank">super.img gsi packer for A03 core - 3443 - Linux version - Must have lpmake installed!</a></li>
-        <li><a href="https://t.me/A03Cdevelopment/1/76580" target="_blank">Unicock usb drivers, for fastbootd recovery to work</a></li>
+        <li><a href="https://t.me/A03Cdevelopment/94/76439" target="_blank">super.img gsi packer for A03 core - 3443 - Linux version</a></li>
+        <li><a href="https://t.me/A03Cdevelopment/1/76580" target="_blank">Unicock usb drivers</a></li>
         <li><a href="https://t.me/A03Cdevelopment/17/76473" target="_blank">[INSTRUCTION] How to install GSI using fastbootd recovery - sheffdeveloper</a></li>
       </ul>
     </section>
   </main>
 
   <footer>
-    Im doing my best to credit everyone, if you don't like your work being posted here, just report that to me ! - 3443
+    I'm doing my best to credit everyone — if you don't like your work being posted here, just report that to me! — 3443
   </footer>
 
   <script>
     function showPage(pageId) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
       document.getElementById(pageId).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   </script>
 </body>
