@@ -96,23 +96,48 @@
 
     /* Clean list styling */
     ul {
-      list-style: none; /* removes the dots */
+      list-style: none;
       padding: 0;
-      margin-top: 1rem; /* spacing under the title */
+      margin-top: 1rem;
     }
 
     ul li {
-      margin-bottom: 0.6rem; /* spacing between links */
+      margin-bottom: 0.6rem;
     }
 
     h2 {
-      margin-bottom: 0.75rem; /* spacing under section titles */
+      margin-bottom: 0.75rem;
       color: #79c0ff;
     }
 
     p {
       margin-bottom: 1rem;
       color: #c9d1d9;
+    }
+
+    /* Telegram link styling */
+    .telegram-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #21262d;
+      padding: 0.6rem 1rem;
+      border-radius: 0.5rem;
+      color: #58a6ff;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .telegram-link:hover {
+      background: #30363d;
+      transform: translateY(-2px);
+    }
+
+    .telegram-icon {
+      width: 20px;
+      height: 20px;
+      fill: #58a6ff;
     }
   </style>
 </head>
@@ -132,6 +157,13 @@
     <section id="home" class="page active">
       <h2>Welcome to the A03 Core Resources Page</h2>
       <p>Click a button above to view kernels, recoveries, ROMs, and more.</p>
+      
+      <a href="https://t.me/A03Cdevelopment" target="_blank" class="telegram-link">
+        <svg class="telegram-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
+          <path d="M120 0C53.7 0 0 53.7 0 120s53.7 120 120 120 120-53.7 120-120S186.3 0 120 0zm58.3 80.7l-17.6 82.9c-1.3 5.9-4.8 7.3-9.7 4.5l-26.9-19.8-13 12.5c-1.4 1.4-2.5 2.5-5.1 2.5l1.8-26.3 47.9-43.3c2.1-1.9-0.5-3-3.3-1.1l-59.3 37.3-25.5-8c-5.5-1.7-5.6-5.5 1.2-8.1l99.6-38.4c4.6-1.7 8.6 1.1 7.1 8z"/>
+        </svg>
+        Join Telegram Group
+      </a>
     </section>
 
     <section id="kernels" class="page">
