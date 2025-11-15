@@ -289,10 +289,18 @@ async function loadPosts() {
     // Load each post
     for (const filename of postFiles) {
       try {
+        console.log(`Attempting to load: posts/${filename}`);
         const postResponse = await fetch(`posts/${filename}`);
-        if (!postResponse.ok) continue;
+        console.log(`Response status for ${filename}:`, postResponse.status);
+        
+        if (!postResponse.ok) {
+          console.error(`Failed to load ${filename}: ${postResponse.status}`);
+          continue;
+        }
         
         const postText = await postResponse.text();
+        console.log(`Loaded ${filename}, length:`, postText.length);
+        
         const lines = postText.split('\n');
         const title = lines[0].trim();
         const content = lines.slice(1).join('\n').trim();
