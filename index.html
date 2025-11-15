@@ -145,6 +145,26 @@ p {
   margin-top: 1rem;
 }
 
+/* --- POSTS CARDS --- */
+.post-card {
+  background-color: #222;
+  border: 1px solid #333;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  text-align: left;
+  border-radius: 0;
+}
+.post-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: white;
+}
+.post-content {
+  font-size: 14px;
+  color: #ccc;
+  white-space: pre-wrap;
+}
 </style>
 </head>
 <body>
@@ -162,11 +182,13 @@ p {
 </header>
 
 <main>
+  <!-- HOME PAGE WITH POSTS -->
   <section id="home" class="page active">
     <h2>Home</h2>
-    <p></p>
+    <div id="posts-container"></div>
   </section>
 
+  <!-- DEVELOPMENTS PAGE -->
   <section id="developments" class="page">
     <h2>Developments</h2>
 
@@ -190,6 +212,7 @@ p {
 
   </section>
 
+  <!-- CONTACT PAGE -->
   <section id="contact" class="page">
     <h2>Contact Me</h2>
     <div class="contact-buttons">
@@ -209,6 +232,7 @@ p {
     </div>
   </section>
 
+  <!-- DONATE PAGE -->
   <section id="donate" class="page">
     <h2>Donate</h2>
     <p>All donations are appreciated!</p>
@@ -224,6 +248,39 @@ function showPage(pageId) {
   document.getElementById(pageId).classList.add('active');
   window.scrollTo({ top: 0 });
 }
+
+// Load posts from /posts/index.json
+async function loadPosts() {
+  const container = document.getElementById("posts-container");
+
+  try {
+    const index = await fetch("posts/index.json").then(r => r.json());
+
+    for (const file of index) {
+      const text = await fetch("posts/" + file).then(r => r.text());
+
+      const lines = text.split("\n");
+      const title = lines.shift().trim();
+      const content = lines.join("\n").trim();
+
+      const div = document.createElement("div");
+      div.className = "post-card";
+      div.innerHTML = `
+        <div class="post-title">${title}</div>
+        <div class="post-content">${content}</div>
+      `;
+
+      container.appendChild(div);
+    }
+
+  } catch (e) {
+    console.error(e);
+    container.innerHTML = "<p style='color:#ccc'>Failed to load posts.</p>";
+  }
+}
+
+// Run post loading
+loadPosts();
 </script>
 
 </body>
