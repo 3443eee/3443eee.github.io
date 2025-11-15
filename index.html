@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Headers with Subdirectory Navigation</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3443's hub</title>
 <style>
-/* Tiled background */
+/* --- GENERAL STYLES --- */
 body {
   margin: 0;
   background-image: url('res/bg.png');
   background-repeat: repeat;
   background-size: auto;
   font-family: Arial, sans-serif;
+  color: white;
 }
 
-/* Translucent main header */
+/* --- TOP HEADER --- */
 header.translucent {
   position: fixed;
   top: 0;
@@ -30,7 +31,7 @@ header.translucent {
   z-index: 1000;
 }
 
-/* Secondary header */
+/* --- SECONDARY HEADER --- */
 header.secondary {
   position: fixed;
   top: 60px;
@@ -45,85 +46,185 @@ header.secondary {
   z-index: 999;
 }
 
-/* Left buttons */
+/* --- BUTTONS --- */
 .left-buttons {
   display: flex;
   margin-left: 5px;
 }
-
-.left-buttons a {
+.left-buttons button, .right-button button, .contact-btn, .dev-button {
   margin-right: 6px;
   padding: 5px 15px;
   font-size: 14px;
-  text-decoration: none;
+  border: none;
   background-color: #444;
   color: white;
-  border: none;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, transform 0.1s;
+  border-radius: 0;
   display: flex;
   align-items: center;
+  gap: 6px;
 }
-
-/* Right (donate) button */
-.right-button {
-  margin-right: 6px;
-}
-
-.right-button a {
-  padding: 5px 15px;
-  font-size: 14px;
-  text-decoration: none;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  display: flex;
-  align-items: center;
-}
-
-/* Hover effects */
-.left-buttons a:hover {
+.left-buttons button:hover, .contact-btn:hover, .dev-button:hover {
   background-color: #666;
+  transform: translateY(-1px);
 }
 
-.right-button a:hover {
+.right-button {
+  margin-right: 5px;
+}
+.right-button button {
+  background-color: #4CAF50;
+}
+.right-button button:hover {
   background-color: #45a049;
+  transform: translateY(-1px);
 }
 
-/* Content */
+/* --- MAIN CONTENT --- */
 main {
-  padding-top: 100px; /* space for headers */
+  padding-top: 100px;
+  text-align: center;
 }
+
+/* --- PAGE SECTIONS --- */
+.page {
+  display: none;
+  animation: fadeIn 0.25s ease;
+  background-color: #1c1c1c;
+  color: #fff;
+  margin: 20px;
+  padding: 40px;
+  border: 1px solid #333;
+  border-radius: 0;
+}
+.page.active {
+  display: block;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+  color: #fff;
+  margin-bottom: 15px;
+}
+p {
+  color: #ccc;
+  margin-bottom: 1rem;
+}
+
+/* --- DEVELOPMENT CARDS --- */
+.dev-card {
+  background-color: #222;
+  border: 1px solid #333;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 600px;
+  text-align: left;
+  border-radius: 0;
+}
+.dev-title {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: white;
+}
+.dev-desc {
+  font-size: 14px;
+  margin-bottom: 15px;
+  color: #ccc;
+}
+.contact-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+  margin-top: 1rem;
+}
+
 </style>
 </head>
 <body>
 
-<!-- Translucent header -->
-<header class="translucent">
-  Welcome to My Site
-</header>
-
-<!-- Secondary header with subdirectory links -->
+<header class="translucent">3443's hub.</header>
 <header class="secondary">
   <div class="left-buttons">
-    <a href="home/">Home</a>
-    <a href="developments/">Developments</a>
-    <a href="contact/">Contact</a>
+    <button onclick="showPage('home')">Home</button>
+    <button onclick="showPage('developments')">Developments</button>
+    <button onclick="showPage('contact')">Contact</button>
   </div>
   <div class="right-button">
-    <a href="donate/">Donate</a>
+    <button onclick="showPage('donate')">Donate</button>
   </div>
 </header>
 
 <main>
-  <p>Here is some content under the headers.</p>
-  <p>Scroll down to see the tiled background behind both headers.</p>
-  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vitae.</p>
-  <p>Keep scrolling...</p>
-  <p>More content...</p>
+  <section id="home" class="page active">
+    <h2>Home</h2>
+    <p></p>
+  </section>
+
+  <section id="developments" class="page">
+    <h2>Developments</h2>
+
+    <div class="dev-card">
+      <div class="dev-title">A03 Core resources.</div>
+      <div class="dev-desc">A small site with a bunch of useful resources for the samsung A03 core.</div>
+      <button class="dev-button" onclick="location.href='A03coreresources'">View</button>
+    </div>
+
+    <div class="dev-card">
+      <div class="dev-title">Voxel Engine</div>
+      <div class="dev-desc">A lightweight custom voxel engine made in C++.</div>
+      <button class="dev-button" onclick="window.open('https://example.com', '_blank')">View</button>
+    </div>
+
+    <div class="dev-card">
+      <div class="dev-title">Custom Kernel</div>
+      <div class="dev-desc">Experimental kernel development and reverse engineering logs.</div>
+      <button class="dev-button" onclick="window.open('https://example.com', '_blank')">View</button>
+    </div>
+
+  </section>
+
+  <section id="contact" class="page">
+    <h2>Contact Me</h2>
+    <div class="contact-buttons">
+      <button class="contact-btn" onclick="window.open('https://t.me/rantof3443', '_blank')">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" style="width:20px;height:20px;"> Telegram group
+      </button>
+      <button class="contact-btn" onclick="window.open('https://discord.gg/6w2whwc4km', '_blank')">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" style="width:20px;height:20px;"> Discord server
+      </button>
+    </div>
+    <div style="margin-top:1rem;color:#ccc;font-size:16px;text-align:center;">
+      <p>Discord: adamiolona</p>
+      <p>Matrix: @3443p:matrix.org</p>
+      <p>Telegram: t.me/three443</p>
+      <p>Mail: 3443p@proton.me</p>
+      <p>XDA: xdaforums.com/m/3443.13261936/</p>
+    </div>
+  </section>
+
+  <section id="donate" class="page">
+    <h2>Donate</h2>
+    <p>All donations are appreciated!</p>
+    <p>|</p>
+    <p>BTC: bc1qykjnr9hccqagqa3eeqtw874zugg4g5wq43k9sh</p>
+    <p>ETH: 0xaE925960C0086d190d2Eb1E39b30F874605747Ca</p>
+  </section>
 </main>
+
+<script>
+function showPage(pageId) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(pageId).classList.add('active');
+  window.scrollTo({ top: 0 });
+}
+</script>
 
 </body>
 </html>
