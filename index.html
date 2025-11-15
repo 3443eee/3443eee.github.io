@@ -165,6 +165,13 @@ p {
   color: #ccc;
   white-space: pre-wrap;
 }
+
+/* Loading message */
+.loading {
+  color: #ccc;
+  font-size: 14px;
+  margin: 20px;
+}
 </style>
 </head>
 <body>
@@ -185,7 +192,9 @@ p {
   <!-- HOME PAGE WITH POSTS -->
   <section id="home" class="page active">
     <h2>Home</h2>
-    <div id="posts-container"></div>
+    <div id="posts-container">
+      <div class="loading">Loading posts...</div>
+    </div>
   </section>
 
   <!-- DEVELOPMENTS PAGE -->
@@ -217,10 +226,10 @@ p {
     <h2>Contact Me</h2>
     <div class="contact-buttons">
       <button class="contact-btn" onclick="window.open('https://t.me/rantof3443', '_blank')">
-        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" style="width:20px;height:20px;"> Telegram group
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/telegram.svg" style="width:20px;height:20px;filter:invert(1);"> Telegram group
       </button>
       <button class="contact-btn" onclick="window.open('https://discord.gg/6w2whwc4km', '_blank')">
-        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" style="width:20px;height:20px;"> Discord server
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/discord.svg" style="width:20px;height:20px;filter:invert(1);"> Discord server
       </button>
     </div>
     <div style="margin-top:1rem;color:#ccc;font-size:16px;text-align:center;">
@@ -243,44 +252,85 @@ p {
 </main>
 
 <script>
+// Page navigation function
 function showPage(pageId) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.getElementById(pageId).classList.add('active');
-  window.scrollTo({ top: 0 });
-}
-
-// Load posts from /posts/index.json
-async function loadPosts() {
-  const container = document.getElementById("posts-container");
-
-  try {
-    const index = await fetch("posts/index.json").then(r => r.json());
-
-    for (const file of index) {
-      const text = await fetch("posts/" + file).then(r => r.text());
-
-      const lines = text.split("\n");
-      const title = lines.shift().trim();
-      const content = lines.join("\n").trim();
-
-      const div = document.createElement("div");
-      div.className = "post-card";
-      div.innerHTML = `
-        <div class="post-title">${title}</div>
-        <div class="post-content">${content}</div>
-      `;
-
-      container.appendChild(div);
-    }
-
-  } catch (e) {
-    console.error(e);
-    container.innerHTML = "<p style='color:#ccc'>Failed to load posts.</p>";
+  const pages = document.querySelectorAll('.page');
+  pages.forEach(page => {
+    page.classList.remove('active');
+  });
+  const targetPage = document.getElementById(pageId);
+  if (targetPage) {
+    targetPage.classList.add('active');
   }
 }
 
-// Run post loading
-loadPosts();
+// Load posts dynamically
+async function loadPosts() {
+  const postsContainer = document.getElementById('posts-container');
+  
+  try {
+    // Fetch the index.json file
+    const indexResponse = await fetch('posts/index.json');
+    if (!indexResponse.ok) {
+      throw new Error('Could not load posts index');
+    }
+    
+    const postFiles = await indexResponse.json();
+    
+    // Clear loading message
+    postsContainer.innerHTML = '';
+    
+    // If no posts, show message
+    if (!postFiles || postFiles.length === 0) {
+      postsContainer.innerHTML = '<div class="loading">No posts available.</div>';
+      return;
+    }
+    
+    // Load each post
+    for (const filename of postFiles) {
+      try {
+        const postResponse = await fetch(`posts/${filename}`);
+        if (!postResponse.ok) continue;
+        
+        const postText = await postResponse.text();
+        const lines = postText.split('\n');
+        const title = lines[0].trim();
+        const content = lines.slice(1).join('\n').trim();
+        
+        // Create post card
+        const postCard = document.createElement('div');
+        postCard.className = 'post-card';
+        
+        const postTitle = document.createElement('div');
+        postTitle.className = 'post-title';
+        postTitle.textContent = title;
+        
+        const postContent = document.createElement('div');
+        postContent.className = 'post-content';
+        postContent.textContent = content;
+        
+        postCard.appendChild(postTitle);
+        postCard.appendChild(postContent);
+        postsContainer.appendChild(postCard);
+        
+      } catch (err) {
+        console.error(`Error loading post ${filename}:`, err);
+      }
+    }
+    
+    // If no posts were loaded successfully
+    if (postsContainer.children.length === 0) {
+      postsContainer.innerHTML = '<div class="loading">No posts could be loaded.</div>';
+    }
+    
+  } catch (error) {
+    console.error('Error loading posts:', error);
+    postsContainer.innerHTML = '<div class="loading">Error loading posts. Make sure posts/index.json exists.</div>';
+  }
+}
+
+// Load posts when page loads
+document.addEventListener('DOMContentLoaded', loadPosts);
 </script>
 
 </body>
