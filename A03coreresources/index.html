@@ -1,242 +1,399 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>A03 Core Resources</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A03 Core Resources</title>
+<style>
+/* --- GENERAL STYLES --- */
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
+  background-attachment: fixed;
+  font-family: Arial, sans-serif;
+  color: white;
+  position: relative;
+  overflow-x: hidden;
+}
 
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(60, 60, 60, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(80, 80, 80, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(50, 50, 50, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
 
-    body {
-      font-family: system-ui, sans-serif;
-      background-color: #0d1117;
-      color: #e6edf3;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+}
 
-    header {
-      background-color: #161b22;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #30363d;
-    }
+/* --- TOP HEADER --- */
+header.translucent {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: linear-gradient(90deg, rgba(20, 20, 20, 0.9) 0%, rgba(30, 30, 30, 0.9) 50%, rgba(20, 20, 20, 0.9) 100%);
+  border-bottom: 1px solid #333;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  z-index: 1000;
+}
 
-    header h1 { font-size: 1.25rem; color: #58a6ff; }
+/* --- SECONDARY HEADER --- */
+header.secondary {
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 100%;
+  height: 40px;
+  background-color: #222;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  z-index: 999;
+}
 
-    nav {
-      display: flex;
-      gap: 1rem;
-    }
+/* --- BUTTONS --- */
+.nav-buttons {
+  display: flex;
+  gap: 6px;
+}
+.nav-buttons button {
+  padding: 5px 15px;
+  font-size: 14px;
+  border: none;
+  background-color: #444;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  border-radius: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-buttons button:hover {
+  background-color: #666;
+  transform: translateY(-1px);
+}
 
-    nav button {
-      background: #21262d;
-      color: #c9d1d9;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 0.5rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: background 0.18s ease, color 0.18s ease, transform 0.12s ease;
-    }
+/* --- MAIN CONTENT --- */
+main {
+  padding-top: 100px;
+  padding-bottom: 20px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
 
-    nav button:hover {
-      background: #30363d;
-      color: #58a6ff;
-      transform: translateY(-1px);
-    }
+/* --- PAGE SECTIONS --- */
+.page {
+  display: none;
+  animation: fadeIn 0.25s ease;
+  background-color: rgba(28, 28, 28, 0.95);
+  color: #fff;
+  margin: 20px;
+  margin-bottom: 20px;
+  padding: 40px;
+  border: 1px solid #333;
+  border-radius: 0;
+  position: relative;
+  z-index: 1;
+}
+.page.active {
+  display: block;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    main {
-      flex: 1;
-      padding: 2rem;
-      text-align: center;
-    }
+h2 {
+  color: #fff;
+  margin-bottom: 15px;
+}
+p {
+  color: #ccc;
+  margin-bottom: 1rem;
+}
 
-    footer {
-      text-align: center;
-      padding: 1rem;
-      border-top: 1px solid #30363d;
-      font-size: 0.9rem;
-      color: #8b949e;
-    }
+/* --- HOME BUTTONS GRID --- */
+.button-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  max-width: 800px;
+  margin: 2rem auto;
+}
 
-    .page { display: none; animation: fadeIn 0.28s ease; }
-    .active { display: block; }
+.home-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 180px;
+  padding: 15px 20px;
+  border: none;
+  border-radius: 0;
+  font-size: 14px;
+  font-weight: normal;
+  background: #444;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.2s, transform 0.1s;
+  font-family: Arial, sans-serif;
+}
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+.home-btn:hover {
+  background-color: #666;
+  transform: translateY(-1px);
+}
 
-    a { color: #58a6ff; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+.home-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  stroke: none;
+}
 
-    h2 { margin-bottom: 0.75rem; color: #79c0ff; }
-    p { margin-bottom: 1rem; color: #c9d1d9; }
+.home-btn svg.stroke-icon {
+  fill: none;
+  stroke: currentColor;
+}
 
-    /* Button grid (centered, responsive, last row centered) */
-    /* Centered, responsive flex layout */
-    .button-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 0 1rem;
-    }
-    
-    .home-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      min-width: 180px;
-      padding: 1rem;
-      border: none;
-      border-radius: 0.75rem;
-      font-size: 1rem;
-      font-weight: 600;
-      background: #21262d;
-      color: #c9d1d9;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.18s ease, color 0.18s ease, transform 0.15s ease, box-shadow 0.18s ease;
-    }
-    
-    .home-btn:hover {
-      background: #30363d;
-      color: #58a6ff;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(88,166,255,0.08);
-    }
+/* --- RESOURCE CARDS --- */
+.resource-card {
+  background-color: rgba(34, 34, 34, 0.95);
+  border: 1px solid #333;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+  text-align: left;
+  border-radius: 0;
+}
 
+.resource-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: white;
+  font-weight: bold;
+}
 
-    /* make sure <button> and <a> look identical and keep icon sizes */
-    .home-btn svg { width: 20px; height: 20px; fill: currentColor; opacity: 0.95; }
+.resource-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 
-    /* small responsive tweaks */
-    @media (max-width: 420px) {
-      .button-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.75rem; }
-      .home-btn { font-size: 0.95rem; padding: 0.9rem; }
-      header { padding: 0.8rem 1rem; }
-    }
+.resource-links li {
+  margin-bottom: 12px;
+}
 
-    /* Links list styling for sections */
-    ul { list-style: none; padding: 0; margin-top: 1rem; }
-    ul li { margin-bottom: 0.6rem; color: #c9d1d9; }
-    code { background: #0b1220; padding: 0.12rem 0.32rem; border-radius: 6px; color: #9be3ff; }
-  </style>
+.resource-links a {
+  color: #58a6ff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.resource-links a:hover {
+  color: #79c0ff;
+  text-decoration: underline;
+}
+
+code {
+  background: #0b1220;
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: #9be3ff;
+  font-size: 13px;
+}
+
+/* --- FOOTER --- */
+footer {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #888;
+  font-size: 14px;
+  border-top: 1px solid #333;
+  margin-top: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 600px) {
+  .button-grid {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .home-btn {
+    min-width: 0;
+    width: 100%;
+  }
+}
+</style>
 </head>
 <body>
-  <header>
-    <h1>Galaxy A03 Core Resources Page</h1>
-    <nav>
-      <button onclick="showPage('home')">Home</button>
-      <button onclick="showPage('kernels')">Kernels</button>
-      <button onclick="showPage('recoveries')">Recoveries</button>
-      <button onclick="showPage('roms')">ROMs</button>
-      <button onclick="showPage('tools')">Tools & Instructions</button>
-    </nav>
-  </header>
 
-  <main>
-    <!-- HOME PAGE -->
-    <section id="home" class="page active">
-      <h2>Welcome to the A03 Core Resources Page</h2>
-      <p>Select a category below to explore kernels, recoveries, ROMs, tools, and more.</p>
+<header class="translucent">A03 Core Resources</header>
+<header class="secondary">
+  <div class="nav-buttons">
+    <button onclick="showPage('home')">Home</button>
+    <button onclick="showPage('kernels')">Kernels</button>
+    <button onclick="showPage('recoveries')">Recoveries</button>
+    <button onclick="showPage('roms')">ROMs</button>
+    <button onclick="showPage('tools')">Tools & Instructions</button>
+  </div>
+</header>
 
-      <div class="button-grid" role="list">
-        <button class="home-btn" onclick="showPage('kernels')" role="listitem" aria-label="Kernels">
-          <span>⚙️</span>
-          <span>Kernels</span>
-        </button>
+<main>
+  <!-- HOME PAGE -->
+  <section id="home" class="page active">
+    <h2>Welcome to the A03 Core Resources Page</h2>
+    <p>Select a category below to explore kernels, recoveries, ROMs, tools, and more.</p>
 
-        <button class="home-btn" onclick="showPage('recoveries')" role="listitem" aria-label="Recoveries">
-          <span>💾</span>
-          <span>Recoveries</span>
-        </button>
+    <div class="button-grid">
+      <button class="home-btn" onclick="showPage('kernels')">
+        <svg class="stroke-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M12 1v6m0 6v6m5.6-13.6L16.2 7M7.8 16.2 6.4 17.6M23 12h-6m-6 0H5m13.6 5.6L16.2 16.2M7.8 7.8 6.4 6.4"/>
+        </svg>
+        <span>Kernels</span>
+      </button>
 
-        <button class="home-btn" onclick="showPage('roms')" role="listitem" aria-label="ROMs">
-          <span>📱</span>
-          <span>ROMs</span>
-        </button>
+      <button class="home-btn" onclick="showPage('recoveries')">
+        <svg class="stroke-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="7 10 12 15 17 10"/>
+          <line x1="12" y1="15" x2="12" y2="3"/>
+        </svg>
+        <span>Recoveries</span>
+      </button>
 
-        <button class="home-btn" onclick="showPage('tools')" role="listitem" aria-label="Tools and Instructions">
-          <span>🧰</span>
-          <span>Tools &amp; Instructions</span>
-        </button>
+      <button class="home-btn" onclick="showPage('roms')">
+        <svg class="stroke-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <circle cx="12" cy="12" r="3"/>
+        </svg>
+        <span>ROMs</span>
+      </button>
 
-        <!-- Telegram item placed as an <a> so it opens externally -->
-        <a href="https://t.me/A03Cdevelopment" target="_blank" class="home-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" class="telegram-icon" viewBox="0 0 240 240">
+      <button class="home-btn" onclick="showPage('tools')">
+        <svg class="stroke-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+        </svg>
+        <span>Tools & Instructions</span>
+      </button>
+
+      <a href="https://t.me/A03Cdevelopment" target="_blank" class="home-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240">
           <path d="M120 0C53.7 0 0 53.7 0 120s53.7 120 120 120 120-53.7 120-120S186.3 0 120 0zm58.3 80.7l-17.6 82.9c-1.3 5.9-4.8 7.3-9.7 4.5l-26.9-19.8-13 12.5c-1.4 1.4-2.5 2.5-5.1 2.5l1.8-26.3 47.9-43.3c2.1-1.9-0.5-3-3.3-1.1l-59.3 37.3-25.5-8c-5.5-1.7-5.6-5.5 1.2-8.1l99.6-38.4c4.6-1.7 8.6 1.1 7.1 8z"/>
         </svg>
-        Join development group
+        <span>Join development group</span>
       </a>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- KERNELS -->
-    <section id="kernels" class="page">
-      <h2>Kernels (All by IverCoder on GitHub ❤️)</h2>
-      <ul>
+  <!-- KERNELS -->
+  <section id="kernels" class="page">
+    <h2>Kernels</h2>
+    
+    <div class="resource-card">
+      <div class="resource-title">All by IverCoder on GitHub ❤️</div>
+      <ul class="resource-links">
         <li><a href="https://github.com/IverCoder/android_kernel_samsung_a3core/releases/download/4.14.204-202410311709/4.14.204-a3core_IverCoder-202410311709-NoKSU.7z" target="_blank" rel="noopener noreferrer">4.14.204-202410311709 NO KSU - by IverCoder</a></li>
         <li><a href="https://github.com/IverCoder/android_kernel_samsung_a3core/releases/download/4.14.204-202410311709/4.14.204-a3core-202410311709-Rissu_KSU_Arm32_0.7.6_rc1.7z" target="_blank" rel="noopener noreferrer">4.14.204-202410311709 Rissu_KSU v0.7.6 - by IverCoder</a></li>
       </ul>
-    </section>
+    </div>
+  </section>
 
-    <!-- RECOVERIES -->
-    <section id="recoveries" class="page">
-      <h2>Recoveries</h2>
-      <p>TWRP IS VERY UNSTABLE (don’t flash it 😬)</p>
-      <ul>
+  <!-- RECOVERIES -->
+  <section id="recoveries" class="page">
+    <h2>Recoveries</h2>
+    <p>TWRP IS VERY UNSTABLE (don't flash it 😬)</p>
+    
+    <div class="resource-card">
+      <ul class="resource-links">
         <li><a href="https://t.me/A03Cdevelopment/7/26425" target="_blank" rel="noopener noreferrer">TWRP - sheffdeveloper - UNSTABLE</a></li>
         <li><a href="https://t.me/A03Cdevelopment/7/76264" target="_blank" rel="noopener noreferrer">eng-recovery - 3443 - FASTBOOTD RECOVERY - A032F/A032M</a></li>
       </ul>
-    </section>
+    </div>
+  </section>
 
-    <!-- ROMS -->
-    <section id="roms" class="page">
-      <h2>SEMI GSIs / ROMs</h2>
-      <p>Please flash <code>system.img</code> files with fastboot, and <code>super.img</code> files with heimdall / odin.</p>
-      <p>(<code>system.img</code> semi-GSIs support both models A032F and A032M)</p>
-      <ul>
+  <!-- ROMS -->
+  <section id="roms" class="page">
+    <h2>SEMI GSIs / ROMs</h2>
+    <p>Please flash <code>system.img</code> files with fastboot, and <code>super.img</code> files with heimdall / odin.</p>
+    <p>(<code>system.img</code> semi-GSIs support both models A032F and A032M)</p>
+    
+    <div class="resource-card">
+      <ul class="resource-links">
         <li><a href="https://github.com/GoofyOzy4/lineage-a3core-gsi/releases/tag/v5" target="_blank" rel="noopener noreferrer">[A13] Lineage OS 21 - GoofyOzy4 - All variants (super.img - BINARY SPECIFIC)</a></li>
         <li><a href="https://t.me/A03Cdevelopment/1/77068" target="_blank" rel="noopener noreferrer">[A12L] Project nil (VERY LIGHTWEIGHT) - 3443 - Vanilla variant ONLY (system.img - FASTBOOT FLASH)</a></li>
         <li><a href="https://t.me/A03CoreINDONESIA/382/5529" target="_blank" rel="noopener noreferrer">[A15] Fake LOS (AOSP with los apps) - 3443 - Vanilla variant ONLY (system.img - FASTBOOT FLASH)</a></li>
         <li><a href="https://t.me/A03CoreINDONESIA/382/5470" target="_blank" rel="noopener noreferrer">[EXPERIENCED USERS ONLY] [A15] Naked AOSP - 3443 - Vanilla variant ONLY (system.img - FASTBOOT FLASH)</a></li>
       </ul>
-    </section>
+    </div>
+  </section>
 
-    <!-- TOOLS -->
-    <section id="tools" class="page">
-      <h2>Tools</h2>
-      <p>Useful instructions, tools, drivers, and scripts for A03 core</p>
-      <ul>
+  <!-- TOOLS -->
+  <section id="tools" class="page">
+    <h2>Tools & Instructions</h2>
+    <p>Useful instructions, tools, drivers, and scripts for A03 core</p>
+    
+    <div class="resource-card">
+      <ul class="resource-links">
         <li><a href="https://github.com/FlowerGEN/samsung-a03-core-superimg-tool/releases" target="_blank" rel="noopener noreferrer">super.img gsi packer for A03 core - 3443 - Windows version</a></li>
         <li><a href="https://github.com/GoofyOzy4/A03CoreTweak-A032/releases" target="_blank" rel="noopener noreferrer">A03CoreTweak Magisk module - GoofyOzy4</a></li>
         <li><a href="https://t.me/A03Cdevelopment/94/76439" target="_blank" rel="noopener noreferrer">super.img gsi packer for A03 core - 3443 - Linux version</a></li>
         <li><a href="https://t.me/A03Cdevelopment/1/76580" target="_blank" rel="noopener noreferrer">Unicock usb drivers</a></li>
         <li><a href="https://t.me/A03Cdevelopment/17/76473" target="_blank" rel="noopener noreferrer">[INSTRUCTION] How to install GSI using fastbootd recovery - sheffdeveloper</a></li>
       </ul>
-    </section>
-  </main>
+    </div>
+  </section>
+</main>
 
-  <footer>
-    I'm doing my best to credit everyone — if you don't like your work being posted here, just report that to me! — 3443
-  </footer>
+<script>
+function showPage(pageId) {
+  const pages = document.querySelectorAll('.page');
+  pages.forEach(page => {
+    page.classList.remove('active');
+  });
+  const targetPage = document.getElementById(pageId);
+  if (targetPage) {
+    targetPage.classList.add('active');
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
 
-  <script>
-    function showPage(pageId) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.getElementById(pageId).classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  </script>
 </body>
 </html>

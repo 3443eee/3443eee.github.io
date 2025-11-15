@@ -8,11 +8,42 @@
 /* --- GENERAL STYLES --- */
 body {
   margin: 0;
-  background-image: url('res/bg.png');
-  background-repeat: repeat;
-  background-size: auto;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f0f0f 100%);
+  background-attachment: fixed;
   font-family: Arial, sans-serif;
   color: white;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(60, 60, 60, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(80, 80, 80, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(50, 50, 50, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(90deg, rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+    linear-gradient(rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* --- TOP HEADER --- */
@@ -22,7 +53,8 @@ header.translucent {
   left: 0;
   width: 100%;
   height: 60px;
-  background-color: rgba(0, 0, 0, 0.7);
+  background: linear-gradient(90deg, rgba(20, 20, 20, 0.9) 0%, rgba(30, 30, 30, 0.9) 50%, rgba(20, 20, 20, 0.9) 100%);
+  border-bottom: 1px solid #333;
   color: white;
   display: flex;
   align-items: center;
@@ -84,19 +116,25 @@ header.secondary {
 /* --- MAIN CONTENT --- */
 main {
   padding-top: 100px;
+  padding-bottom: 20px;
   text-align: center;
+  position: relative;
+  z-index: 1;
 }
 
 /* --- PAGE SECTIONS --- */
 .page {
   display: none;
   animation: fadeIn 0.25s ease;
-  background-color: #1c1c1c;
+  background-color: rgba(28, 28, 28, 0.95);
   color: #fff;
   margin: 20px;
+  margin-bottom: 20px;
   padding: 40px;
   border: 1px solid #333;
   border-radius: 0;
+  position: relative;
+  z-index: 1;
 }
 .page.active {
   display: block;
@@ -117,7 +155,7 @@ p {
 
 /* --- DEVELOPMENT CARDS --- */
 .dev-card {
-  background-color: #222;
+  background-color: rgba(34, 34, 34, 0.95);
   border: 1px solid #333;
   padding: 20px;
   margin: 20px auto;
@@ -147,7 +185,7 @@ p {
 
 /* --- POSTS CARDS --- */
 .post-card {
-  background-color: #222;
+  background-color: rgba(34, 34, 34, 0.95);
   border: 1px solid #333;
   padding: 30px;
   margin: 25px auto;
